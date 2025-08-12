@@ -10,4 +10,6 @@ public class Constants {
     public static int shooterHoodPort = 8;
 
     public static int addressableLEDPort = 9;
+
+    public static int controllerPort = 0;
 }
