@@ -11,7 +11,7 @@ import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class RobotContainer {
-  private XboxController controller = new XboxController(0);
+  private XboxController controller = new XboxController(Constants.mainControllerPort);
 
   private DriveSubsystem driveSubsystem = new DriveSubsystem();
   private TeleopDriveCommand teleopDrive = new TeleopDriveCommand(driveSubsystem, controller);
