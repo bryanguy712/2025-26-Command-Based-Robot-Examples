@@ -1,28 +1,31 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase{
-    private VictorSP leftDriveMotor = new VictorSP(Constants.LeftDrivePort);
-    private VictorSP rightDriveMotor = new VictorSP(Constants.rightDrivePort);
+    private VictorSP leftDriveMotor;
+    private VictorSP rightDriveMotor;
 
-    private XboxController controller = new XboxController(Constants.controllerPort);
-
-    private DifferentialDrive drive = new DifferentialDrive(leftDriveMotor::set, rightDriveMotor::set);
+    private DifferentialDrive drive;
 
     public DriveSubsystem(){
+        leftDriveMotor = new VictorSP(Constants.LeftDrivePort);
+        rightDriveMotor = new VictorSP(Constants.rightDrivePort);
+
         leftDriveMotor.setInverted(true);
+
+        drive = new DifferentialDrive(leftDriveMotor::set, rightDriveMotor::set);
     }
 
-    public void tankDrive(){
-        drive.tankDrive(-controller.getLeftY(), -controller.getRightX());
+    public void arcadeDrive(double moveRequest, double turnRequest){
+        drive.arcadeDrive(moveRequest, turnRequest);
     }
 
     public void stopDrive() {
-        drive.stopMotor();
+        leftDriveMotor.set(0);
+        rightDriveMotor.set(0);
     }
 }
