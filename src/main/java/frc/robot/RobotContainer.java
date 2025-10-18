@@ -7,18 +7,24 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.commands.ShooterCommands;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
-  private XboxController controller = new XboxController(Constants.mainControllerPort);
+  private XboxController controller = new XboxController(Constants.controllerPort);
 
   private DriveSubsystem driveSubsystem = new DriveSubsystem();
   private TeleopDriveCommand teleopDrive = new TeleopDriveCommand(driveSubsystem, controller);
 
+  private ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private ShooterCommands shooterCommand = new ShooterCommands(shooterSubsystem, controller);
+
   public RobotContainer() {
     configureBindings();
     driveSubsystem.setDefaultCommand(teleopDrive);
+    shooterSubsystem.setDefaultCommand(shooterCommand);
   }
 
   private void configureBindings() {}
